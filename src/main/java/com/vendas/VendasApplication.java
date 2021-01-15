@@ -1,4 +1,4 @@
-package com.example.vendas;
+package com.vendas;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
