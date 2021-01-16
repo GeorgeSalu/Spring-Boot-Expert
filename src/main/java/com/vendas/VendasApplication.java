@@ -28,10 +28,16 @@ public class VendasApplication {
 			clienteRepository.salvar(outroCliente);
 			
 			
-			List<Cliente> obterTodos = clienteRepository.obterTodos();
-			obterTodos.forEach(System.out::println);
+			List<Cliente> todosClientes = clienteRepository.obterTodos();
+			todosClientes.forEach(System.out::println);
 			
+			todosClientes.forEach(c -> {
+				c.setNome(c.getNome() + " atualizado");
+				clienteRepository.atualizar(c);
+			});
 			
+			todosClientes = clienteRepository.obterTodos();
+			todosClientes.forEach(System.out::println);
 			
 		};
 	}
