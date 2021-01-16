@@ -21,22 +21,22 @@ public class VendasApplication {
 		return args -> {
 			Cliente cliente = new Cliente();
 			cliente.setNome("douglas");
-			clienteRepository.salvar(cliente);
+			clienteRepository.save(cliente);
 			
 			Cliente outroCliente = new Cliente();
 			outroCliente.setNome("douglas 2");
-			clienteRepository.salvar(outroCliente);
+			clienteRepository.save(outroCliente);
 			
 			
-			List<Cliente> todosClientes = clienteRepository.obterTodos();
+			List<Cliente> todosClientes = clienteRepository.findAll();
 			todosClientes.forEach(System.out::println);
 			
 			todosClientes.forEach(c -> {
 				c.setNome(c.getNome() + " atualizado");
-				clienteRepository.atualizar(c);
+				clienteRepository.save(c);
 			});
 			
-			todosClientes = clienteRepository.obterTodos();
+			todosClientes = clienteRepository.findAll();
 			todosClientes.forEach(System.out::println);
 			
 		};
