@@ -3,6 +3,7 @@ package com.vendas.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -14,6 +15,10 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 	List<Cliente> encontrarPorNome(@Param("nome") String nome);
 
 	List<Cliente> findByNomeLike(String nome);
+	
+	@Query(value = "delete from Cliente c where c.nome =:nome")
+	@Modifying
+	void deleteByNome(String nome);
 	
 	List<Cliente> findByNomeOrId(String nome, Integer id);
 	
