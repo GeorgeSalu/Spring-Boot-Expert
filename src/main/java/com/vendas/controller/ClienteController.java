@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ClienteController {
 
 	
-	@RequestMapping(value = "/hello/{nome}", method = RequestMethod.GET)
+	@RequestMapping(
+			value = "/hello/{nome}", 
+			method = RequestMethod.POST,
+			consumes = {"application/json", "application/xml"},
+			produces = {"application/json", "application/xml"}
+	)
 	@ResponseBody
 	public String helloClientes(@PathVariable("nome") String nomeCliente) {
 		return String.format("Hello %s", nomeCliente);
