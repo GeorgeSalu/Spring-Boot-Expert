@@ -41,6 +41,9 @@ public class VendasApplication {
 			
 			boolean existsByNome = clienteRepository.existsByNome("douglas");
 			System.out.println(existsByNome);
+			
+			List<Cliente> encontrarPorNome = clienteRepository.encontrarPorNome("douglas atualizado");
+			encontrarPorNome.forEach(System.out::println);
 		};
 	}
 	
