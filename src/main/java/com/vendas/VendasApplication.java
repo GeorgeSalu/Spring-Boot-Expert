@@ -39,6 +39,8 @@ public class VendasApplication {
 			todosClientes = clienteRepository.findAll();
 			todosClientes.forEach(System.out::println);
 			
+			boolean existsByNome = clienteRepository.existsByNome("douglas");
+			System.out.println(existsByNome);
 		};
 	}
 	
