@@ -10,14 +10,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vendas.entity.Cliente;
-import com.vendas.repository.ClienteRepository;
+import com.vendas.repository.ClientesRepository;
 
 @SpringBootApplication
 @RestController
 public class VendasApplication {
 
 	@Bean
-	public CommandLineRunner init(@Autowired ClienteRepository clienteRepository) {
+	public CommandLineRunner init(@Autowired ClientesRepository clienteRepository) {
 		return args -> {
 			Cliente cliente = new Cliente();
 			cliente.setNome("douglas");

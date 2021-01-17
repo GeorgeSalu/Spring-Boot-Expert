@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.vendas.entity.Cliente;
 
-public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
+public interface ClientesRepository extends JpaRepository<Cliente, Integer> {
 	
 	@Query(value = "select c from Cliente c where c.nome like :nome")
 	List<Cliente> encontrarPorNome(@Param("nome") String nome);
