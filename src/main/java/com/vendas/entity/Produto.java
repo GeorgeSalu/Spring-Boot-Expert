@@ -12,15 +12,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "produto")
 public class Produto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "descricao")
-	private String descrica;
-	
+	private String descricao;
+
 	@Column(name = "preco_unitario")
 	private BigDecimal preco;
 
@@ -32,14 +32,6 @@ public class Produto {
 		this.id = id;
 	}
 
-	public String getDescrica() {
-		return descrica;
-	}
-
-	public void setDescrica(String descrica) {
-		this.descrica = descrica;
-	}
-
 	public BigDecimal getPreco() {
 		return preco;
 	}
@@ -48,9 +40,17 @@ public class Produto {
 		this.preco = preco;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	@Override
 	public String toString() {
-		return "Produto [id=" + id + ", descrica=" + descrica + ", preco=" + preco + "]";
+		return "Produto [id=" + id + ", descricao=" + descricao + ", preco=" + preco + "]";
 	}
 
 }
