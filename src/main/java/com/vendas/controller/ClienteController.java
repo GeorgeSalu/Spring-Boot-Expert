@@ -46,36 +46,34 @@ public class ClienteController {
 	}
 	
 	@DeleteMapping("{id}")
-	public ResponseEntity delete(@PathVariable Integer id) {
-		Optional<Cliente> cliente = clientesRepository.findById(id);
-		
-		if(cliente.isPresent()) {
-			clientesRepository.delete(cliente.get());
-			return ResponseEntity.noContent().build();
-		}
-		return ResponseEntity.notFound().build();
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable Integer id) {
+		clientesRepository.findById(id)
+			.map(cliente -> {
+				clientesRepository.delete(cliente);
+				return cliente;
+			}).orElseThrow(() -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity update(@PathVariable Integer id,
+	public void update(@PathVariable Integer id,
 								@RequestBody Cliente cliente) {
-		return clientesRepository
+		 clientesRepository
 					.findById(id)
 					.map(clienteExistente -> {
 						cliente.setId(clienteExistente.getId());
 						clientesRepository.save(cliente);
-						return ResponseEntity.noContent().build();
-					}).orElseGet(() -> ResponseEntity.notFound().build());
+						return clienteExistente;
+					}).orElseThrow(() -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 	}
 	
 	@GetMapping
-	public ResponseEntity find(Cliente filtro) {
+	public List<Cliente> find(Cliente filtro) {
 		ExampleMatcher matcher = ExampleMatcher
 									.matching()
 									.withIgnoreCase()
 									.withStringMatcher(StringMatcher.CONTAINING);
 		Example example = Example.of(filtro, matcher);
-		List<Cliente> lista = clientesRepository.findAll(example);
-		return ResponseEntity.ok(lista);
+		return clientesRepository.findAll(example);
 	}
 }
