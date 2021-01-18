@@ -53,7 +53,7 @@ public class ClienteController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PutMapping("/pai/clientes/{id}")
+	@PutMapping("/api/clientes/{id}")
 	@ResponseBody
 	public ResponseEntity update(@PathVariable Integer id,
 								@RequestBody Cliente cliente) {
