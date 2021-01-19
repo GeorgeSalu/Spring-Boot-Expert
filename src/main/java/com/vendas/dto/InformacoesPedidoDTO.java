@@ -9,19 +9,21 @@ public class InformacoesPedidoDTO {
 	private String cpf;
 	private String nomeCliente;
 	private BigDecimal total;
+	private String dataPedido;
 	private List<InformacaoItemPedidoDTO> items;
 
 	public InformacoesPedidoDTO() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public InformacoesPedidoDTO(Integer codigo, String cpf, String nomeCliente, BigDecimal total,
+
+	public InformacoesPedidoDTO(Integer codigo, String cpf, String nomeCliente, BigDecimal total, String dataPedido,
 			List<InformacaoItemPedidoDTO> items) {
 		super();
 		this.codigo = codigo;
 		this.cpf = cpf;
 		this.nomeCliente = nomeCliente;
 		this.total = total;
+		this.dataPedido = dataPedido;
 		this.items = items;
 	}
 
@@ -63,6 +65,14 @@ public class InformacoesPedidoDTO {
 
 	public void setItems(List<InformacaoItemPedidoDTO> items) {
 		this.items = items;
+	}
+
+	public String getDataPedido() {
+		return dataPedido;
+	}
+
+	public void setDataPedido(String dataPedido) {
+		this.dataPedido = dataPedido;
 	}
 
 }
