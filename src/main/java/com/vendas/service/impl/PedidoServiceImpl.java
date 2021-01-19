@@ -14,6 +14,7 @@ import com.vendas.entity.Cliente;
 import com.vendas.entity.ItemPedido;
 import com.vendas.entity.Pedido;
 import com.vendas.entity.Produto;
+import com.vendas.enums.StatusPedido;
 import com.vendas.exception.RegraNegocioException;
 import com.vendas.repository.ClientesRepository;
 import com.vendas.repository.ItemsPedidoRepository;
@@ -50,6 +51,7 @@ public class PedidoServiceImpl implements PedidoService {
 		pedido.setTotal(dto.getTotal());
 		pedido.setDataPedido(LocalDate.now());
 		pedido.setCliente(cliente);
+		pedido.setStatus(StatusPedido.REALIZADO);
 		
 		List<ItemPedido> itemsPedido = converterItems(pedido, dto.getItems());
 		pedidosRepository.save(pedido);

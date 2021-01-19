@@ -39,7 +39,7 @@ public class Pedido {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
 	private StatusPedido status;
-	
+
 	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> itens;
 
@@ -83,10 +83,18 @@ public class Pedido {
 		this.itens = itens;
 	}
 
+	public StatusPedido getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusPedido status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", cliente=" + cliente + ", dataPedido=" + dataPedido + ", total=" + total
-				+ ", itens=" + itens + "]";
+				+ ", status=" + status + ", itens=" + itens + "]";
 	}
 
 }
