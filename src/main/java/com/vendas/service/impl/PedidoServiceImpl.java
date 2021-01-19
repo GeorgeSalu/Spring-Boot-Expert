@@ -50,14 +50,14 @@ public class PedidoServiceImpl implements PedidoService {
 		pedido.setDataPedido(LocalDate.now());
 		pedido.setCliente(cliente);
 		
-		List<ItemPedido> itemsPedido = converterItens(pedido, dto.getItems());
+		List<ItemPedido> itemsPedido = converterItems(pedido, dto.getItems());
 		pedidosRepository.save(pedido);
 		itemsPedidoRepository.saveAll(itemsPedido);
 		pedido.setItens(itemsPedido);
 		return pedido;
 	}
 	
-	private List<ItemPedido> converterItens(Pedido pedido, List<ItemPedidoDTO> items) {
+	private List<ItemPedido> converterItems(Pedido pedido, List<ItemPedidoDTO> items) {
 		if(items.isEmpty()) {
 			throw new RegraNegocioException("nao é possivel realizar um pedido sem itenss");
 		}
