@@ -8,19 +8,23 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.vendas.dto.AtualizacaoStatusPedidoDTO;
 import com.vendas.dto.InformacaoItemPedidoDTO;
 import com.vendas.dto.InformacoesPedidoDTO;
 import com.vendas.dto.PedidoDTO;
 import com.vendas.entity.ItemPedido;
 import com.vendas.entity.Pedido;
+import com.vendas.enums.StatusPedido;
 import com.vendas.service.PedidoService;
 
 @RestController
@@ -47,6 +51,14 @@ public class PedidoController {
 					.map(p -> converter(p))
 					.orElseThrow(() -> 
 							new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
+	}
+	
+	@PatchMapping("{id}")
+	@ResponseStatus
+	public void updateStatus(@PathVariable Integer id,
+							@RequestBody AtualizacaoStatusPedidoDTO dto) {
+		String novoStatus = dto.getNovoStatus();
+		pedidoService.atualizaStatus(id, StatusPedido.valueOf(novoStatus));
 	}
 	
 	private InformacoesPedidoDTO converter(Pedido pedido) {

@@ -15,6 +15,7 @@ import com.vendas.entity.ItemPedido;
 import com.vendas.entity.Pedido;
 import com.vendas.entity.Produto;
 import com.vendas.enums.StatusPedido;
+import com.vendas.exception.PedidoNaoEncontradoException;
 import com.vendas.exception.RegraNegocioException;
 import com.vendas.repository.ClientesRepository;
 import com.vendas.repository.ItemsPedidoRepository;
@@ -85,5 +86,15 @@ public class PedidoServiceImpl implements PedidoService {
 	@Override
 	public Optional<Pedido> obterPedidoCompleto(Integer id) {
 		return pedidosRepository.findByIdFetchItens(id);
+	}
+
+	@Override
+	@Transactional
+	public void atualizaStatus(Integer id, StatusPedido statusPedido) {
+		pedidosRepository.findById(id)
+							.map(pedido -> {
+								pedido.setStatus(statusPedido);
+								return pedidosRepository.save(pedido);
+							}).orElseThrow(() -> new PedidoNaoEncontradoException());
 	}
 }
