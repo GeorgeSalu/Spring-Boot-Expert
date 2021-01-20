@@ -14,7 +14,7 @@ import com.vendas.exception.RegraNegocioException;
 import com.vendas.rest.ApiErrors;
 
 @RestControllerAdvice
-public class ApplicationControllerAdvice {
+public class ApplicationHandleException {
 
 	@ExceptionHandler(RegraNegocioException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
