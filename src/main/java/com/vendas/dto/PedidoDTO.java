@@ -9,11 +9,11 @@ import com.vendas.validation.NotEmptyList;
 
 public class PedidoDTO {
 	
-	@NotNull(message = "informe o codigo do cliente")
+	@NotNull(message = "{campo.codigo-cliente.obrigatorio}")
 	private Integer cliente;
-	@NotNull(message = "campo total do pedido é obrigatorio")
+	@NotNull(message = "{campo.total-pedido.obrigatorio}")
 	private BigDecimal total;
-	@NotEmptyList(message = "pedido não pode ser realizado sem itens")
+	@NotEmptyList(message = "{campo.items-pedido.obrigatorio}")
 	private List<ItemPedidoDTO> items;
 
 	public Integer getCliente() {
