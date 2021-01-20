@@ -57,7 +57,7 @@ public class ClienteController {
 	
 	@PutMapping("{id}")
 	public void update(@PathVariable Integer id,
-								@RequestBody Cliente cliente) {
+								@RequestBody @Valid Cliente cliente) {
 		 clientesRepository
 					.findById(id)
 					.map(clienteExistente -> {

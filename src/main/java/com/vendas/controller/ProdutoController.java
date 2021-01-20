@@ -4,6 +4,8 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
@@ -36,14 +38,14 @@ public class ProdutoController {
 	
 	@PostMapping
 	@ResponseStatus(value = CREATED)
-	public Produto save(@RequestBody Produto produto) {
+	public Produto save(@RequestBody @Valid Produto produto) {
 		return produtosRepository.save(produto);
 	}
 	
 	@PutMapping("{id}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void update(@PathVariable Integer id,
-						@RequestBody Produto produto) {
+						@RequestBody @Valid Produto produto) {
 		produtosRepository.findById(id)
 			.map(p -> {
 				produto.setId(p.getId());
