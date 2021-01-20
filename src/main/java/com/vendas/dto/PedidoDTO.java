@@ -5,12 +5,15 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import com.vendas.validation.NotEmptyList;
+
 public class PedidoDTO {
 	
 	@NotNull(message = "informe o codigo do cliente")
 	private Integer cliente;
 	@NotNull(message = "campo total do pedido é obrigatorio")
 	private BigDecimal total;
+	@NotEmptyList(message = "pedido não pode ser realizado sem itens")
 	private List<ItemPedidoDTO> items;
 
 	public Integer getCliente() {
