@@ -3,8 +3,13 @@ package com.vendas.dto;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 public class PedidoDTO {
+	
+	@NotNull(message = "informe o codigo do cliente")
 	private Integer cliente;
+	@NotNull(message = "campo total do pedido é obrigatorio")
 	private BigDecimal total;
 	private List<ItemPedidoDTO> items;
 
