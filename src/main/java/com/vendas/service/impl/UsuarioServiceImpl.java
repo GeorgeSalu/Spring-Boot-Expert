@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vendas.entity.Usuario;
+import com.vendas.exception.SenhaInvalidaException;
 import com.vendas.repository.UsuarioRepository;
 
 @Service
@@ -24,6 +25,15 @@ public class UsuarioServiceImpl implements UserDetailsService {
 	@Transactional
 	public Usuario salvar(Usuario usuario) {
 		return usuarioRepository.save(usuario);
+	}
+	
+	public UserDetails autenticar(Usuario usuario) {
+		UserDetails user = loadUserByUsername(usuario.getLogin());
+		boolean senhasBatem = encoder.matches(usuario.getSenha(), user.getPassword());
+		if(senhasBatem) {
+			return user;
+		}
+		throw new SenhaInvalidaException();
 	}
 	
 	@Override
